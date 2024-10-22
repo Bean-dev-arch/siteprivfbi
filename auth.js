@@ -10,18 +10,13 @@ exports.handler = async (event, context) => {
         "TH5X5FLD": "3MQ9",
         "TAKSMHN4": "41UE",
         "Z56ER267": "4DJR"
-    };
+   };
 
-    if (users[username] && users[username] === password) {
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ success: true }),
-        };
+    // Vérification des identifiants et redirection
+    if (validUsers[username] && validUsers[username] === password) {
+        alert("Connexion réussie !");
+        window.location.href = "bonjour.html";  // Redirection vers la page "Bonjour"
     } else {
-        return {
-            statusCode: 401,
-            body: JSON.stringify({ success: false }),
-        };
+        alert("Identifiant ou mot de passe incorrect.");
     }
-};
-
+});
