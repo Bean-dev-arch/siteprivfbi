@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page protégée</title>
+</head>
+<body>
+    <h1>Connexion</h1>
+    <form id="loginForm">
+        <label for="username">Identifiant :</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Connexion</button>
+    </form>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Appelle la fonction Netlify pour vérifier l'identifiant et le mot de passe
+            const response = await fetch('/.netlify/functions/auth', {
+                method: 'POST',
+                body: JSON.stringify({ username, password }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Connexion réussie !');
+                window.location.href = "page-secrète.html"; // Redirige vers la page secrète
+            } else {
+                alert('Échec de la connexion. Identifiant ou mot de passe incorrect.');
+            }
+        });
+    </script>
+</body>
+</html>
 
