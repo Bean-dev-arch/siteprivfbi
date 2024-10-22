@@ -1,0 +1,5 @@
+[build]
+  functions = "functions"  # Dossier où se trouvent les fonctions
+
+[functions]
+  directory = "functions"
